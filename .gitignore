@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# WatchMate
+.env
+__pycache__/
+*.pyc
+*.pkl
