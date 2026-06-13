@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head><title>Recommendations</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Watchlist – WatchMate</title>
+</head>
 <body>
-<h1>Your Movie Recommendations</h1>
-{% for rec in recommendations %}
-<div class="card">
-  <h2>{{ rec.title }}</h2>
-  <p>Score: {{ rec.score }}</p>
-  <p>{{ rec.explanation }}</p>
-</div>
-{% endfor %}
+  <h1>Your WatchMate Picks</h1>
+  {% for rec in recommendations %}
+  <div>
+    <h2>{{ rec.rank }}. {{ rec.title }}</h2>
+    <p>Match score: {{ "%.0f"|format(rec.score * 100) }}%</p>
+    <p>{{ rec.explanation }}</p>
+  </div>
+  {% endfor %}
+  <a href="/">Start over</a>
 </body>
 </html>
