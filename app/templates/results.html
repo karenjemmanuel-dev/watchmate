@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Recommendations</title></head>
+<body>
+<h1>Your Movie Recommendations</h1>
+{% for rec in recommendations %}
+<div class="card">
+  <h2>{{ rec.title }}</h2>
+  <p>Score: {{ rec.score }}</p>
+  <p>{{ rec.explanation }}</p>
+</div>
+{% endfor %}
+</body>
+</html>
