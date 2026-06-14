@@ -10,7 +10,7 @@ from app.db import (
     get_results,
     session_exists,
 )
-from model.recommender import recommend
+from model.recommender import MovieRecommender
 
 load_dotenv()
 
