@@ -16,3 +16,17 @@ print(movies.shape)
 data = pd.merge(ratings, movies[['movie_id', 'title']], on='movie_id')
 print(data.head(10))
 print(data.shape)
+# Check for missing values
+print("Missing values in ratings:")
+print(ratings.isnull().sum())
+
+print("\nMissing values in movies:")
+print(movies[['movie_id', 'title']].isnull().sum())
+
+# Check rating range (should be 1-5 only)
+print("\nRating range:")
+print(ratings['rating'].min(), "to", ratings['rating'].max())
+
+# Check for duplicate ratings (same user rating same movie twice)
+duplicates = ratings.duplicated(subset=['user_id', 'movie_id']).sum()
+print("\nDuplicate ratings:", duplicates)
