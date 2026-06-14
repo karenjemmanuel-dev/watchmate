@@ -222,3 +222,4 @@ __marimo__/
 __pycache__/
 *.pyc
 *.pkl
+.claude/
