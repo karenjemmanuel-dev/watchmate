@@ -1,0 +1,56 @@
+{
+    "dataset_name": "MovieLens 100K",
+    "version": "1.0",
+    "created_date": "2026-06-14",
+    "description": "100,000 movie ratings from 943 users on 1,682 movies",
+    "source": "https://grouplens.org/datasets/movielens/100k/",
+    "num_rows": 100000,
+    "num_columns": 5,
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "integer",
+        "description": "Unique identifier for user (1-943)",
+        "constraints": "Non-null, positive integer, range 1-943"
+      },
+      {
+        "name": "movie_id",
+        "type": "integer",
+        "description": "Unique identifier for movie (1-1682)",
+        "constraints": "Non-null, positive integer, range 1-1682"
+      },
+      {
+        "name": "rating",
+        "type": "integer",
+        "description": "User's rating of the movie",
+        "constraints": "Non-null, integer in range 1-5"
+      },
+      {
+        "name": "timestamp",
+        "type": "integer",
+        "description": "Unix timestamp of when rating was given",
+        "constraints": "Non-null, positive integer"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Movie title with release year",
+        "constraints": "Non-null, string"
+      }
+    ],
+    "data_quality": {
+      "missing_values": 0,
+      "duplicate_ratings": 0,
+      "rating_range": "1-5"
+    },
+    "assumptions": [
+      "Ratings are on a 1-5 integer scale",
+      "Each user-movie pair appears at most once",
+      "Data is from 1997"
+    ],
+    "limitations": [
+      "Data is 25+ years old",
+      "Limited to movies available in 1997",
+      "May have implicit bias in user demographics"
+    ]
+  }
