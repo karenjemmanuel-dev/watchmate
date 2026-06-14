@@ -1,12 +1,13 @@
 import os
-from dotenv import load_dotenv
 from supabase import create_client, Client
+from dotenv import load_dotenv
 
 load_dotenv()
 
-
 def get_client() -> Client:
-    return create_client(os.environ["SUPABASE_URL"], os.environ["SUPABASE_KEY"])
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_KEY")
+    return create_client(url, key)
 
 
 def create_session() -> str:
@@ -35,11 +36,12 @@ def get_preferences(session_id: str) -> list[dict]:
     return result.data
 
 
-def save_results(session_id: str, recommendations: list[dict]) -> None:
+def save_results(session_id: str, recommendations: list) -> None:
     client = get_client()
-    rows = [{"session_id": session_id, **r} for r in recommendations]
-    client.table("results").insert(rows).execute()
-    client.table("sessions").update({"status": "done"}).eq("id", session_id).execute()
+    client.table("results").insert({
+        "session_id": session_id,
+        "recommendations": recommendations,
+    }).execute()
 
 
 def get_results(session_id: str) -> list[dict]:
@@ -48,10 +50,11 @@ def get_results(session_id: str) -> list[dict]:
         client.table("results")
         .select("*")
         .eq("session_id", session_id)
-        .order("rank")
         .execute()
     )
-    return result.data
+    if result.data:
+        return result.data[0].get("recommendations", [])
+    return []
 
 
 def session_exists(session_id: str) -> bool:

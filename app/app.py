@@ -1,6 +1,8 @@
+from app.mood_filter import combine_mood_genres
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, session
+import pandas as pd
 
 from app.db import (
     create_session,
@@ -17,6 +19,17 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-fallback-secret")
 
+print("Loading movie data...")
+MOVIES_DF = pd.read_csv('data/u.item', sep='|', encoding='latin-1', header=None)
+print(f"Loaded {len(MOVIES_DF)} movies")
+
+
+def get_movie_title(movie_id):
+    row = MOVIES_DF[MOVIES_DF[0] == movie_id]
+    if len(row) > 0:
+        return row.iloc[0][1]
+    return f"Movie {movie_id}"
+
 
 @app.route("/")
 def index():
@@ -31,10 +44,8 @@ def partner_a():
         prefs = {
             "genres": request.form.getlist("genres"),
             "mood": request.form.get("mood", ""),
-            "min_rating": float(request.form.get("min_rating", 1.0)),
             "year_from": int(request.form.get("year_from", 1900)),
             "year_to": int(request.form.get("year_to", 2026)),
-            "content_type": request.form.get("content_type", "both"),
         }
         save_preferences(session["session_id"], "a", prefs)
         return redirect(url_for("partner_b"))
@@ -47,10 +58,8 @@ def partner_b():
         prefs = {
             "genres": request.form.getlist("genres"),
             "mood": request.form.get("mood", ""),
-            "min_rating": float(request.form.get("min_rating", 1.0)),
             "year_from": int(request.form.get("year_from", 1900)),
             "year_to": int(request.form.get("year_to", 2026)),
-            "content_type": request.form.get("content_type", "both"),
         }
         save_preferences(session["session_id"], "b", prefs)
 
@@ -58,10 +67,39 @@ def partner_b():
         prefs_a = next(p for p in all_prefs if p["partner"] == "a")
         prefs_b = next(p for p in all_prefs if p["partner"] == "b")
 
-        recommendations = recommend(prefs_a, prefs_b)
-        save_results(session["session_id"], recommendations)
+        recommender = MovieRecommender('model.pkl')
+        all_movie_ids = list(range(1, 1683))
+
+        recommendations = recommender.find_compatible_movies(
+            user_a_id=1,
+            user_b_id=2,
+            all_movie_ids=all_movie_ids,
+            threshold=3.5
+        )
+
+        mood_genres = combine_mood_genres(prefs_a["mood"], prefs_b["mood"])
+        mood_a = prefs_a["mood"]
+        mood_b = prefs_b["mood"]
+        combined_mood_description = f"{mood_a} + {mood_b}"
+
+        recommendations_list = []
+        for rank, (movie_id, score) in enumerate(recommendations[:10], 1):
+            title = get_movie_title(movie_id)
+            normalized_score = (score - 1.0) / 4.0
+            normalized_score = max(0, min(1, normalized_score))
+            
+            recommendations_list.append({
+                "rank": rank,
+                "movie_id": movie_id,
+                "title": title,
+                "score": normalized_score,
+                "explanation": f"Based on both your moods: {combined_mood_description}"
+            })
+
+        save_results(session["session_id"], recommendations_list)
 
         return redirect(url_for("results", session_id=session["session_id"]))
+    
     return render_template("partner_b.html")
 
 
