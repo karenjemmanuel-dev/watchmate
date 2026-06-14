@@ -1,0 +1,67 @@
+
+<html>
+<head>
+    <title>WatchMate EDA Report</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f5f5f5; }
+        h1 { color: #1f77b4; }
+        h2 { color: #1f77b4; margin-top: 30px; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #1f77b4; color: white; }
+        .stat { background: white; padding: 20px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>WatchMate MovieLens Exploratory Data Analysis</h1>
+    <p>Generated: 2026-06-14 13:34:51</p>
+    
+    <h2>Dataset Overview</h2>
+    <div class="stat">
+        <p><b>Total Ratings:</b> 100,000</p>
+        <p><b>Total Movies:</b> 1,682</p>
+        <p><b>Total Users:</b> 943</p>
+        <p><b>Rating Range:</b> 1 to 5</p>
+    </div>
+    
+    <h2>Rating Distribution</h2>
+    <div class="stat">
+        <table>
+            <tr><th>Rating</th><th>Count</th><th>Percentage</th></tr>
+            <tr><td>1</td><td>6,110</td><td>6.1%</td></tr>
+            <tr><td>2</td><td>11,370</td><td>11.4%</td></tr>
+            <tr><td>3</td><td>27,145</td><td>27.1%</td></tr>
+            <tr><td>4</td><td>34,174</td><td>34.2%</td></tr>
+            <tr><td>5</td><td>21,201</td><td>21.2%</td></tr>
+
+        </table>
+    </div>
+    
+    <h2>Top 10 Most Rated Movies</h2>
+    <div class="stat">
+        <table>
+            <tr><th>Movie Title</th><th>Number of Ratings</th></tr>
+            <tr><td>Star Wars (1977)</td><td>583</td></tr>
+            <tr><td>Contact (1997)</td><td>509</td></tr>
+            <tr><td>Fargo (1996)</td><td>508</td></tr>
+            <tr><td>Return of the Jedi (1983)</td><td>507</td></tr>
+            <tr><td>Liar Liar (1997)</td><td>485</td></tr>
+            <tr><td>English Patient, The (1996)</td><td>481</td></tr>
+            <tr><td>Scream (1996)</td><td>478</td></tr>
+            <tr><td>Toy Story (1995)</td><td>452</td></tr>
+            <tr><td>Air Force One (1997)</td><td>431</td></tr>
+            <tr><td>Independence Day (ID4) (1996)</td><td>429</td></tr>
+
+        </table>
+    </div>
+    
+    <h2>Data Quality</h2>
+    <div class="stat">
+        <p><b>Missing Values:</b> 0 (0 is good)</p>
+        <p><b>Duplicate Ratings:</b> 0 (0 is good)</p>
+        <p><b>Average Rating:</b> 3.53</p>
+        <p><b>Median Rating:</b> 4.00</p>
+    </div>
+    
+</body>
+</html>
