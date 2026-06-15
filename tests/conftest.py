@@ -1,19 +1,20 @@
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 
 @pytest.fixture
 def mock_db(monkeypatch):
-    """Patches all db functions so routes don't hit Supabase."""
+    """Patches all db and ML calls so routes don't hit Supabase or load model.pkl."""
+    mock_recommender = MagicMock()
+    mock_recommender.find_compatible_movies.return_value = [(1, 3.9), (2, 3.7)]
+
     with patch("app.app.create_session", return_value="test-session-id"), \
          patch("app.app.save_preferences"), \
          patch("app.app.get_preferences", return_value=[
              {"partner": "a", "genres": ["Action"], "mood": "fun",
-              "min_rating": 3.0, "year_from": 2000, "year_to": 2023,
-              "content_type": "movies"},
+              "year_from": 2000, "year_to": 2023},
              {"partner": "b", "genres": ["Comedy"], "mood": "relaxed",
-              "min_rating": 3.5, "year_from": 1995, "year_to": 2023,
-              "content_type": "both"},
+              "year_from": 1995, "year_to": 2023},
          ]), \
          patch("app.app.save_results"), \
          patch("app.app.get_results", return_value=[
@@ -21,10 +22,8 @@ def mock_db(monkeypatch):
               "explanation": "Great pick", "rank": 1},
          ]), \
          patch("app.app.session_exists", return_value=True), \
-         patch("app.app.recommend", return_value=[
-             {"movie_id": 1, "title": "Movie A", "score": 0.9,
-              "explanation": "Great pick", "rank": 1},
-         ]):
+         patch("app.app.MovieRecommender", return_value=mock_recommender), \
+         patch("app.app.combine_mood_genres", return_value=["Action", "Comedy"]):
         yield
 
 

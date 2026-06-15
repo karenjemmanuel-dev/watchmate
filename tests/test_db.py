@@ -53,7 +53,7 @@ def test_get_preferences_returns_list():
     assert result[0]["partner"] == "a"
 
 
-def test_save_results_inserts_and_updates_status():
+def test_save_results_inserts_recommendations():
     mock_client = _mock_client()
     recs = [
         {"movie_id": 1, "title": "Movie A", "score": 0.9, "explanation": "Great", "rank": 1}
@@ -62,17 +62,20 @@ def test_save_results_inserts_and_updates_status():
         save_results("session-1", recs)
     calls = [str(c) for c in mock_client.table.call_args_list]
     assert any("results" in c for c in calls)
-    assert any("sessions" in c for c in calls)
+    inserted = mock_client.table.return_value.insert.call_args[0][0]
+    assert inserted["session_id"] == "session-1"
+    assert inserted["recommendations"] == recs
 
 
-def test_get_results_returns_ordered_list():
+def test_get_results_returns_recommendations_list():
     mock_client = _mock_client()
-    mock_client.table.return_value.select.return_value.eq.return_value.order.return_value.execute.return_value.data = [
-        {"rank": 1, "title": "Movie A"},
-        {"rank": 2, "title": "Movie B"},
+    recs = [{"rank": 1, "title": "Movie A"}, {"rank": 2, "title": "Movie B"}]
+    mock_client.table.return_value.select.return_value.eq.return_value.execute.return_value.data = [
+        {"recommendations": recs}
     ]
     with patch("app.db.get_client", return_value=mock_client):
         result = get_results("session-1")
+    assert result == recs
     assert result[0]["rank"] == 1
 
 

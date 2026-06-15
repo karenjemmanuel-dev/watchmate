@@ -18,10 +18,8 @@ def test_partner_a_post_saves_and_redirects(client, mock_db):
     response = client.post("/partner/a", data={
         "genres": ["Action", "Drama"],
         "mood": "excited",
-        "min_rating": "3.5",
         "year_from": "2000",
         "year_to": "2023",
-        "content_type": "movies",
     })
     assert response.status_code == 302
     assert "/partner/b" in response.location
@@ -41,10 +39,8 @@ def test_partner_b_post_triggers_recommend_and_redirects(client, mock_db):
     response = client.post("/partner/b", data={
         "genres": ["Comedy"],
         "mood": "relaxed",
-        "min_rating": "3.0",
         "year_from": "1995",
         "year_to": "2023",
-        "content_type": "both",
     })
     assert response.status_code == 302
     assert "/results/test-session-id" in response.location

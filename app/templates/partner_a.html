@@ -1,39 +1,192 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Partner A – WatchMate</title>
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>WatchMate — Partner A Choice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#900038",
+                        "surface-variant": "#e7e1de",
+                        "on-secondary-container": "#631800",
+                        "secondary-fixed-dim": "#ffb59f",
+                        "on-tertiary-container": "#4e3d00",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fef8f4",
+                        "surface-bright": "#fef8f4",
+                        "primary-fixed-dim": "#ffb2be",
+                        "secondary": "#ac3509",
+                        "outline": "#8f6f73",
+                        "on-surface": "#1d1b19",
+                        "surface-tint": "#bc004b",
+                        "on-error-container": "#93000a",
+                        "primary": "#b80049",
+                        "surface-container-highest": "#e7e1de",
+                        "tertiary-fixed": "#ffe087",
+                        "on-primary-fixed": "#400014",
+                        "surface-container-low": "#f8f2ef",
+                        "primary-fixed": "#ffd9de",
+                        "on-tertiary-fixed": "#241a00",
+                        "on-background": "#1d1b19",
+                        "on-secondary-fixed-variant": "#852300",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "tertiary-container": "#cda721",
+                        "on-secondary-fixed": "#3a0a00",
+                        "on-surface-variant": "#5b3f43",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#e4bdc2",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdbd0",
+                        "inverse-surface": "#32302e",
+                        "tertiary-fixed-dim": "#ebc23e",
+                        "surface-dim": "#ded9d5",
+                        "inverse-primary": "#ffb2be",
+                        "surface-container": "#f3ede9",
+                        "secondary-container": "#fe6f42",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#e2165f",
+                        "surface-container-high": "#ede7e3",
+                        "tertiary": "#735c00",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f5f0ec",
+                        "surface": "#fef8f4"
+                    },
+                    "borderRadius": {"DEFAULT": "0.25rem","lg": "0.5rem","xl": "0.75rem","full": "9999px"},
+                    "spacing": {"xs": "4px","sm": "12px","md": "24px","gutter": "16px","container-margin": "20px","xl": "64px","base": "8px","lg": "40px"},
+                    "fontFamily": {"headline-md": ["Bricolage Grotesque"],"body-lg": ["Plus Jakarta Sans"],"label-lg": ["Plus Jakarta Sans"],"headline-lg-mobile": ["Bricolage Grotesque"],"display-lg": ["Bricolage Grotesque"],"body-md": ["Plus Jakarta Sans"],"label-md": ["Plus Jakarta Sans"],"headline-lg": ["Bricolage Grotesque"]},
+                    "fontSize": {"headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],"body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],"label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700"}],"headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],"display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],"body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],"label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],"headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]}
+                },
+            },
+        }
+    </script>
+<script>
+        function toggleGenre(element) {
+            const isSelected = element.getAttribute('aria-checked') === 'true';
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            const icon = element.querySelector('.status-icon');
+            if (!isSelected) {
+                element.setAttribute('aria-checked', 'true');
+                element.classList.remove('bg-surface', 'border-outline-variant', 'text-on-surface-variant');
+                element.classList.add('bg-primary', 'text-on-primary', 'border-primary', 'scale-105');
+                checkbox.checked = true;
+                icon.textContent = 'check_circle';
+                icon.style.fontVariationSettings = "'FILL' 1";
+            } else {
+                element.setAttribute('aria-checked', 'false');
+                element.classList.add('bg-surface', 'border-outline-variant', 'text-on-surface-variant');
+                element.classList.remove('bg-primary', 'text-on-primary', 'border-primary', 'scale-105');
+                checkbox.checked = false;
+                icon.textContent = 'add_circle';
+                icon.style.fontVariationSettings = "'FILL' 0";
+            }
+        }
+    </script>
+<style>
+        .asymmetric-card { transform: rotate(-1.5deg); }
+        .asymmetric-card:nth-child(even) { transform: rotate(1.2deg); }
+        .spark-burst { transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .spark-burst:active { transform: scale(0.9); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
 </head>
-<body>
-  <h1>Partner A Preferences</h1>
-  <form method="POST" action="/partner/a">
-    <label>Genres (hold Ctrl/Cmd to pick multiple)
-      <select name="genres" multiple>
-        <option value="Action">Action</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Drama">Drama</option>
-        <option value="Horror">Horror</option>
-        <option value="Romance">Romance</option>
-        <option value="Sci-Fi">Sci-Fi</option>
-        <option value="Thriller">Thriller</option>
-        <option value="Animation">Animation</option>
-        <option value="Documentary">Documentary</option>
-      </select>
-    </label>
-    <br>
-    <label>Mood (describe how you're feeling tonight)
-      <input type="text" name="mood" placeholder="e.g. tired and want something light" required>
-    </label>
-    <br>
-    <label>Year from
-      <input type="number" name="year_from" min="1900" max="2026" value="2000">
-    </label>
-    <label>to
-      <input type="number" name="year_to" min="1900" max="2026" value="2026">
-    </label>
-    <br>
-    <br>
-    <button type="submit">Next → Partner B</button>
-  </form>
-</body>
-</html>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-32 selection:bg-primary-fixed-dim">
+<header class="docked full-width top-0 bg-surface/80 backdrop-blur-md shadow-sm shadow-primary/5 z-50 sticky">
+<div class="flex justify-between items-center px-gutter py-sm w-full max-w-7xl mx-auto">
+<div class="text-headline-lg-mobile font-headline-lg-mobile text-primary tracking-tight">WatchMate</div>
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform active:scale-95 duration-200">favorite</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform active:scale-95 duration-200">account_circle</span>
+</div>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-container-margin pt-lg">
+<div class="text-center mb-lg">
+<div class="inline-flex items-center justify-center w-16 h-16 bg-secondary-fixed rounded-full mb-sm animate-bounce">
+<span class="material-symbols-outlined text-on-secondary-fixed text-3xl" style="font-variation-settings: 'FILL' 1;">movie_edit</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg md:text-display-lg text-primary mb-xs">Partner A — What's your vibe tonight?</h1>
+</div>
+<form action="/partner/a" class="space-y-lg" method="POST">
+<section class="bg-surface-container-low rounded-xl p-md border-2 border-dashed border-outline-variant/50 relative overflow-hidden">
+<div class="flex items-center gap-xs mb-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">theater_comedy</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Choose Your Flavors</h2>
+</div>
+<div class="flex flex-wrap gap-sm">
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Action" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Action</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Adventure" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Adventure</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Animation" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Animation</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Comedy" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Comedy</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Drama" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Drama</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Documentary" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Documentary</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Fantasy" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Fantasy</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Horror" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Horror</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Romance" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Romance</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Sci-Fi" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Sci-Fi</span></div>
+<div onclick="toggleGenre(this)" aria-checked="false" class="cursor-pointer flex items-center gap-xs px-md py-sm rounded-full bg-surface border-2 border-outline-variant text-on-surface-variant transition-all duration-300 hover:border-secondary group spark-burst"><input type="checkbox" name="genres" value="Thriller" class="hidden"><span class="material-symbols-outlined status-icon text-sm transition-all group-hover:scale-110">add_circle</span><span class="font-label-lg text-label-lg">Thriller</span></div>
+</div>
+</section>
+<section class="bg-surface-container-high rounded-xl p-md shadow-sm">
+<label class="flex flex-col gap-xs cursor-pointer group" for="mood">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-tertiary-container text-2xl" style="font-variation-settings: 'FILL' 1;">mood</span>
+<div class="flex flex-col"><span class="font-headline-md text-headline-md text-on-surface">Vibe Check</span><span class="font-body-md text-body-md text-on-surface-variant opacity-70">How are you actually feeling right now?</span></div>
+</div>
+<textarea class="w-full bg-surface border-2 border-outline-variant focus:border-secondary focus:ring-secondary rounded-xl font-body-md text-body-md p-md transition-all resize-none shadow-inner" id="mood" name="mood" placeholder="e.g. tired and just want to laugh" rows="3"></textarea>
+</label>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-md items-end bg-tertiary-fixed/20 p-md rounded-xl border border-tertiary-container/30">
+<div class="space-y-sm">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary">calendar_month</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Time Capsule</h3>
+</div>
+<div class="relative">
+<input class="w-full h-14 pl-12 pr-4 bg-surface border-2 border-outline-variant rounded-xl font-label-lg focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all" max="2025" min="1900" name="year_from" placeholder="1990" type="number">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">first_page</span>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center gap-xs"><h3 class="font-headline-md text-headline-md text-on-surface">...to</h3></div>
+<div class="relative">
+<input class="w-full h-14 pl-12 pr-4 bg-surface border-2 border-outline-variant rounded-xl font-label-lg focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all" max="2025" min="1900" name="year_to" placeholder="2024" type="number">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">last_page</span>
+</div>
+</div>
+</section>
+<div class="pt-md flex flex-col items-center gap-md">
+<button class="group relative inline-flex items-center justify-center px-12 py-5 font-headline-md text-headline-md text-on-primary bg-primary rounded-full overflow-hidden shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300" type="submit">
+<span class="relative z-10">Pass to Partner B →</span>
+<div class="absolute inset-0 bg-secondary transition-transform translate-y-full group-hover:translate-y-0 duration-300"></div>
+</button>
+<div class="flex items-center gap-sm text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined animate-pulse">lock_person</span>
+<span class="font-label-md text-label-md">Selection is hidden until both match!</span>
+</div>
+</div>
+</form>
+<div class="mt-xl grid grid-cols-2 md:grid-cols-4 gap-md opacity-40 pointer-events-none select-none">
+<div class="asymmetric-card bg-white p-2 shadow-lg border-4 border-white rotate-[-3deg]"><img alt="Sunset movie vibe" class="w-full h-32 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8PLahKCg6LGMJXrcjNdWhcNdGW4cFwum5zzc1ITdLEPofLd1YxvY2YfonDJ85GDTm-lDNGqhOMZqFk0w5ewj6UrD1jhKNF_cPa_8CLJN4-qQ1aQ5LasxNSEZdUGRpXiNi4WsCOGlsuoLrKgnyqaBTHJdliGu7Te7M_zouO937FMnhCHRCxHg6Lx2Ms9eZgbooIQrcS-WiHABKbkqkH7-_aErvkZggYk5FlQ5kSCjPMAlrXwMC8ZAw3_gbGRwKYbPMcBiKDSvvjqI"></div>
+<div class="asymmetric-card bg-white p-2 shadow-lg border-4 border-white rotate-[2deg]"><img alt="Popcorn vibe" class="w-full h-32 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdaakxkHwLMtBgtwC_ZHDZWDc_YQyEpox8QqApivH8Nryn4WJvE7c0uGAE9M399ddsolcm_zFw-hIAnCe1YSdVJ_piMUN0xdu9-Ed1wL1Lbb0jo6mhqSJQeMcW8BXGEVofkyEWfxeYRBIMEcevaypTRVP0qpcXHqMmW_Wk_z1VqxUJeNiWkkiY5gXMP-08aVFU-JbXKhd3JiLCjYnnStRyJZTlwsPZgc2thgmdh4ZqGm8p_uRyHP_vqm4aVImIisgzuyZYieATIGQ"></div>
+<div class="hidden md:block asymmetric-card bg-white p-2 shadow-lg border-4 border-white rotate-[-4deg]"><img alt="Cinema seat" class="w-full h-32 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcOgPvjjiKTqSzq0BJFm9GR-pXFSeguT2TzNNcpk8Pl5gVd1prXKo_wcI1MTIZ9_kzuMds_tvdzvMmW4CkUpuH_CqBFbFrYB9wzhC-7-JFSEm1o7AIkjtIwfHpmtJG_n-vYrmvGl8visz5YWrK8wk1kuOFat3k3ZuH0Gx1A1NvnOYTVAgX2RIROQYp3wnNDiYkL_hCKJPe3llH0NSuUZpwyslXn-J339AV7a_zX_qq8Snnn5PhrekmNG8_I_3dKqlLKDQM-Cd9C0c"></div>
+<div class="hidden md:block asymmetric-card bg-white p-2 shadow-lg border-4 border-white rotate-[3deg]"><img alt="Clapperboard and wine" class="w-full h-32 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv9xAUoJLVbB9aX4ERUKSwzxnz1XIgnHqObXeFWZgPcp8UdbvhZzcq1natt21aPs2Bwvc0RqerPpvryaSm-sdzOKk7BNrrYGEZsygi96juueDiHfL9CRpdHNesoLEHLUzbwnEs_CvaVPr5v1W-50wo0_SATQkXKyaHyE5izGJ46wessT7rmlnDa8GKUtJXXnRUW9r4gzayEsrcZ4H0_jlW7xN6JrFUEOB_xMMMeKetYLWe-zq--aXuB4tUYykjgttElY0fLedeq-M"></div>
+</div>
+</main>
+<footer class="w-full py-xl flex flex-col items-center gap-md px-gutter text-center border-t border-outline-variant/30 bg-surface-container-low mt-xl">
+<div class="font-headline-md text-headline-md text-primary">WatchMate</div>
+<div class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Terms</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Our Story</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-60">© 2026 WatchMate. Made with popcorn &amp; love.</p>
+</footer>
+</body></html>
