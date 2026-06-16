@@ -150,7 +150,6 @@ def partner_b():
             mood_genres=mood_genres,
         )
 
-        # Pick user IDs that best match each partner's genre taste
         user_a_id = find_user_for_genres(prefs_a.get("genres", []) or mood_genres) or 1
         user_b_id = find_user_for_genres(prefs_b.get("genres", []) or mood_genres) or 2
         if user_a_id == user_b_id:
@@ -198,4 +197,5 @@ def results(session_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
