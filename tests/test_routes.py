@@ -1,5 +1,11 @@
-def test_index_redirects_to_partner_a(client, mock_db):
+def test_index_renders_landing_page(client, mock_db):
     response = client.get("/")
+    assert response.status_code == 200
+    assert b"WatchMate" in response.data
+
+
+def test_start_redirects_to_partner_a(client, mock_db):
+    response = client.get("/start")
     assert response.status_code == 302
     assert "/partner/a" in response.location
 

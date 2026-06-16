@@ -1,4 +1,5 @@
 import pickle
+import random
 import numpy as np
 
 class MovieRecommender:
@@ -6,7 +7,7 @@ class MovieRecommender:
         """Load the trained model."""
         with open(model_path, 'rb') as f:
             self.model = pickle.load(f)
-        print("✓ Model loaded successfully")
+        print("Model loaded successfully")
     
     def predict_ratings(self, user_id, movie_ids):
         """
@@ -58,6 +59,9 @@ class MovieRecommender:
             if avg_score >= threshold:
                 compatible.append((movie_id, avg_score))
         
-        # Sort by score descending
+        # Shuffle first so movies tied on score (common with this model)
+        # aren't always broken in the same movie_id order, then sort by
+        # score descending.
+        random.shuffle(compatible)
         compatible.sort(key=lambda x: x[1], reverse=True)
         return compatible

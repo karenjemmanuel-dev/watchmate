@@ -58,3 +58,18 @@ def test_find_compatible_movies_filters_by_threshold():
         user_a_id=1, user_b_id=2, all_movie_ids=[1, 2, 3], threshold=3.5
     )
     assert results == []
+
+
+def test_find_compatible_movies_randomizes_tied_scores():
+    rec, mock_model = _make_recommender()
+    mock_model.predict.side_effect = lambda x: np.array([4.0])  # all movies tie
+    movie_ids = list(range(1, 11))
+
+    orderings = set()
+    for _ in range(20):
+        results = rec.find_compatible_movies(
+            user_a_id=1, user_b_id=2, all_movie_ids=movie_ids, threshold=3.0
+        )
+        orderings.add(tuple(movie_id for movie_id, _ in results))
+
+    assert len(orderings) > 1

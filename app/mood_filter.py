@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 def get_genres_from_mood(mood_text):
     """Use LLM to translate mood/emotion into movie genres"""
@@ -46,6 +46,43 @@ def get_genres_from_mood(mood_text):
     except Exception as e:
         print(f"Error calling OpenAI: {e}")
         return ["Drama", "Comedy"]
+
+
+def get_movie_synopses(titles: list[str]) -> dict[str, str]:
+    """Fetch a one-sentence synopsis for each movie title in a single API call."""
+    if not titles:
+        return {}
+
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    titles_block = "\n".join(f"- {t}" for t in titles)
+
+    prompt = f"""For each movie below, write exactly one sentence describing what it's about.
+Reply as a numbered list matching the order. Only the sentence, nothing else.
+
+Movies:
+{titles_block}"""
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=400,
+        )
+        lines = response.choices[0].message.content.strip().splitlines()
+        result = {}
+        for i, title in enumerate(titles):
+            if i < len(lines):
+                line = lines[i].strip()
+                # strip leading "1. " / "- " etc.
+                line = line.lstrip("0123456789.-) ").strip()
+                result[title] = line
+            else:
+                result[title] = ""
+        return result
+    except Exception as e:
+        print(f"Error fetching synopses: {e}")
+        return {t: "" for t in titles}
 
 
 def combine_mood_genres(mood_a, mood_b):

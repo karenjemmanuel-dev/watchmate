@@ -58,9 +58,13 @@
 </div>
 </div>
 <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">{{ rec.title }}</h2>
+<div class="flex flex-wrap gap-1 mb-sm">
+  {% if rec.year %}<span class="text-[11px] font-label-md bg-tertiary-fixed text-on-surface px-2 py-0.5 rounded-full">{{ rec.year }}</span>{% endif %}
+  {% for g in rec.genres %}<span class="text-[11px] font-label-md bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-full">{{ g }}</span>{% endfor %}
+</div>
 <div class="mb-md">
-<h3 class="font-label-md text-primary uppercase text-[10px] mb-xs">Why You'll Both Love It</h3>
-<p class="font-body-md text-on-surface-variant line-clamp-3">{{ rec.explanation }}</p>
+<h3 class="font-label-md text-primary uppercase text-[10px] mb-xs">What It's About</h3>
+<p class="font-body-md text-on-surface-variant">{{ rec.explanation }}</p>
 </div>
 </div>
 <div>
